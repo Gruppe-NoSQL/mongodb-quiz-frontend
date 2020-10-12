@@ -1,11 +1,24 @@
-# mongodb-quiz-frontend
+# nosql-quiz
 
+## Project setup
+```
+npm install
+```
 
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
+### Compiles and minifies for production
+```
+npm run build
+```
 
-Matthias war nicht hier
-Und wird hier auch nicht sein
+### Lints and fixes files
+```
+npm run lint
+```
 
-### leel
-
-Repository für NoSQL Quiz Frontend
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
