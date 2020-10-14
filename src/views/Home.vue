@@ -19,7 +19,7 @@
                       <v-text-field
                         label="Vorname Nachname"
                         v-model="username"
-                        :rules="requiredRule"
+                        :rules="requiredAndlengthRule"
                         required
                       ></v-text-field>
                     </v-form>
@@ -46,14 +46,16 @@
 
 <script>
 import { uuid } from 'vue-uuid';
+import axios from 'axios';
 
 export default {
   data: function () {
     return {
       username: '',
       isValid: true,
-      requiredRule: [
-        value => !!value || 'Bitte geben'
+      requiredAndlengthRule: [
+        value => !!value || 'Bitte gib deine Namen ein um fortzufahren',
+        value => value.length>=6 || 'Der Name muss mindestens 6 Zeichen haben'
       ]
     }
   },
@@ -62,19 +64,31 @@ export default {
       if(this.$refs.form.validate()) {
         let deviceId = localStorage.getItem('deviceId');
 
+        //if client has no deviceId gernate uuid and safe to local storage
         if(!deviceId){
           deviceId = uuid.v4();
           localStorage.setItem('deviceId', deviceId);
         }
 
-        console.log(deviceId);
-        console.log(this.username)
-        this.$router.push('/quiz');
+        //prepare request payload
+        let payload = {
+          'username': this.username,
+          'deviceId': deviceId
+        }
+        
+        //send request to the server
+        axios.post(this.$store.state.backendServer + '/user', payload)
+        .then((response)=>{
+          console.log(response);
+          this.$router.push('/quiz');
+        })
+        .catch((err)=>{
+          console.log(err);
+        });
       }
     }
   },
   mounted(){
-    console.log(this.$store.state.backendServer)
   }
 }
 </script>
