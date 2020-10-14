@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     startQuiz: function(){
+      //validate form
       if(this.$refs.form.validate()) {
         let deviceId = localStorage.getItem('deviceId');
 
@@ -79,7 +80,6 @@ export default {
         //send request to the server
         axios.post(this.$store.state.backendServer + '/user', payload)
         .then((response)=>{
-          console.log(response);
           this.$router.push('/quiz');
         })
         .catch((err)=>{
