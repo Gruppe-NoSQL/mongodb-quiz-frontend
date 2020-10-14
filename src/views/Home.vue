@@ -63,6 +63,7 @@ export default {
     startQuiz: function(){
       //validate form
       if(this.$refs.form.validate()) {
+        //retrive uuid from localStorage
         let deviceId = localStorage.getItem('deviceId');
 
         //if client has no deviceId gernate uuid and safe to local storage
