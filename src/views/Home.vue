@@ -79,7 +79,7 @@ export default {
         
         //send request to the server
         axios.post(this.$store.state.backendServer + '/user', payload)
-        .then((response)=>{
+        .then(()=>{
           this.$router.push('/quiz');
         })
         .catch((err)=>{
