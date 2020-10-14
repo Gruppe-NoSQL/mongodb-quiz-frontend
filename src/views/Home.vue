@@ -15,13 +15,14 @@
                     sm="6"
                     md="6"
                   >
-                    <form>
+                    <v-form ref="form" v-model="isValid" lazy-validation>
                       <v-text-field
                         label="Vorname Nachname"
                         v-model="username"
                         :rules="requiredRule"
+                        required
                       ></v-text-field>
-                    </form>
+                    </v-form>
                   </v-col>
                 </v-card-text>
                 <v-card-actions>
@@ -50,23 +51,26 @@ export default {
   data: function () {
     return {
       username: '',
+      isValid: true,
       requiredRule: [
-        value => !!value || 'Dieses Feld wird benötigt'
+        value => !!value || 'Bitte geben'
       ]
     }
   },
   methods: {
     startQuiz: function(){
-      let deviceId = localStorage.getItem('deviceId');
+      if(this.$refs.form.validate()) {
+        let deviceId = localStorage.getItem('deviceId');
 
-      if(!deviceId){
-        deviceId = uuid.v4();
-        localStorage.setItem('deviceId', deviceId);
+        if(!deviceId){
+          deviceId = uuid.v4();
+          localStorage.setItem('deviceId', deviceId);
+        }
+
+        console.log(deviceId);
+        console.log(this.username)
+        this.$router.push('/quiz');
       }
-
-      console.log(deviceId);
-      console.log(this.username)
-      this.$router.push('/quiz');
     }
   },
   mounted(){
