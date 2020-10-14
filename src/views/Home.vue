@@ -54,7 +54,7 @@ export default {
       username: '',
       isValid: true,
       requiredAndlengthRule: [
-        value => !!value || 'Bitte gib deine Namen ein um fortzufahren',
+        value => !!value || 'Bitte gib deinen Namen ein um fortzufahren',
         value => value.length>=6 || 'Der Name muss mindestens 6 Zeichen haben'
       ]
     }
