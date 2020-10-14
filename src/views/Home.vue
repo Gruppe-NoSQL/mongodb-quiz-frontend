@@ -15,9 +15,13 @@
                     sm="6"
                     md="6"
                   >
-                    <v-text-field
-                      label="Vorname Nachname"
-                    ></v-text-field>
+                    <form>
+                      <v-text-field
+                        label="Vorname Nachname"
+                        v-model="username"
+                        :rules="requiredRule"
+                      ></v-text-field>
+                    </form>
                   </v-col>
                 </v-card-text>
                 <v-card-actions>
@@ -45,7 +49,10 @@ import { uuid } from 'vue-uuid';
 export default {
   data: function () {
     return {
-      count: 0
+      username: '',
+      requiredRule: [
+        value => !!value || 'Dieses Feld wird benötigt'
+      ]
     }
   },
   methods: {
@@ -58,6 +65,8 @@ export default {
       }
 
       console.log(deviceId);
+      console.log(this.username)
+      this.$router.push('/quiz');
     }
   },
   mounted(){
