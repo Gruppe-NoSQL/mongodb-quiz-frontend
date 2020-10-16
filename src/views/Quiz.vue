@@ -15,37 +15,31 @@
                 </v-card-text>
                 <v-divider></v-divider>
                 <br />
-                <v-radio-group>
+                <v-radio-group v-model="answer">
                   <v-radio
-
                     label="Antwort1"
                     :value="1"
-                    :v-model="answer1"
                     class="ml-4"
                   ></v-radio>
                   <v-radio
-                   
                     label="Antwort2"
                     :value="2"
-                    :v-model="answer2"
                     class="ml-4"
                   ></v-radio>
                   <v-radio
-                    
                     label="Antwort3"
                     :value="3"
-                    :v-model="answer3"
                     class="ml-4"
                   ></v-radio>
                   <v-radio
-                    
-                    label="Antwort4"
+                    label="Anwort4"
                     :value="4"
-                    :v-model="answer4"
                     class="ml-4"
-                  ></v-radio>
+                  ></v-radio> 
                 </v-radio-group>
                 <br />
+                <label>{{ result }}</label>
+                <span>Picked: {{ answer }}</span>
                 <br />
                 <v-card-actions>
                   <v-col offset-md="8">
@@ -71,11 +65,9 @@ export default {
   data:() => ({
     counter: 0,
     textB: 'Weiter',
-    result: ' ',
-    answer1: false,
-    answer2: false,
-    answer3: false,
-    answer4: false
+    result: [],
+    answer: ' ',
+    Antwort4: ' ',
   }),
 
   methods: {
@@ -93,21 +85,31 @@ export default {
       }
     },
     checkedBox(){
-      if (this.answer1==true){
+      if (this.answer=='1'){
         this.result.push("a")
+        this.answer=' '
+        //senden & array löschen
       }
-      if (this.answer2==true){
+      if (this.answer=='2'){
         this.result.push("b")
+        this.answer=' '
       }
-      if (this.answer3==true){
+      if (this.answer=='3'){
         this.result.push("c")
+        this.answer=' '
       }
-      if (this.answer4==true){
+      if (this.answer=='4'){
         this.result.push("d")
+        this.answer=' '
       }
-    }
+
+    },
+    sendAnswer(){
+        //
+      }
+    },
   }
-}
+
 
 
 </script>
