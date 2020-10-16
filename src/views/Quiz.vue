@@ -11,16 +11,37 @@
                 </v-card-title>
                 <v-card-text>
                   <h2>Frage</h2>
-                  <p>{{ f+1 }}/6</p>
+                  <p>{{ counter+1 }}/6</p>
                 </v-card-text>
                 <v-divider></v-divider>
                 <br />
                 <v-radio-group>
                   <v-radio
-                    v-for="n in 4"
-                    :key="n"
-                    :label="`Antwort ${n}`"
-                    :value="n"
+
+                    label="Antwort1"
+                    :value="1"
+                    :v-model="answer1"
+                    class="ml-4"
+                  ></v-radio>
+                  <v-radio
+                   
+                    label="Antwort2"
+                    :value="2"
+                    :v-model="answer2"
+                    class="ml-4"
+                  ></v-radio>
+                  <v-radio
+                    
+                    label="Antwort3"
+                    :value="3"
+                    :v-model="answer3"
+                    class="ml-4"
+                  ></v-radio>
+                  <v-radio
+                    
+                    label="Antwort4"
+                    :value="4"
+                    :v-model="answer4"
                     class="ml-4"
                   ></v-radio>
                 </v-radio-group>
@@ -32,7 +53,7 @@
                       color="primary"
                       elevation="3"
                       large
-                      v-on:click="weiterButton(); textButton(); resultButton()"
+                      v-on:click="weiterButton(); textButton(); resultButton(); checkedBox()"
                     >{{ textB }}</v-btn>
                   </v-col>
                 </v-card-actions>
@@ -43,27 +64,46 @@
   </div>
 </template>
 
+
 <script>
 
 export default {
   data:() => ({
-    f: 0,
+    counter: 0,
     textB: 'Weiter',
-    result: ' '
+    result: ' ',
+    answer1: false,
+    answer2: false,
+    answer3: false,
+    answer4: false
   }),
 
   methods: {
     weiterButton() {
-      this.f++;
+      this.counter++;
     },
     textButton() {
-      if (this.f > 4) {
+      if (this.counter > 4) {
         this.textB='Abschicken'
       }
     },
     resultButton() {
-      if (this.f > 5) {
+      if (this.counter > 5) {
         this.$router.push('/result')
+      }
+    },
+    checkedBox(){
+      if (this.answer1==true){
+        this.result.push("a")
+      }
+      if (this.answer2==true){
+        this.result.push("b")
+      }
+      if (this.answer3==true){
+        this.result.push("c")
+      }
+      if (this.answer4==true){
+        this.result.push("d")
       }
     }
   }
