@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Quiz from '../views/Quiz.vue'
 import Result from '../views/Result.vue'
 import About from '../views/About.vue'
+import Layout from '../views/Layout.vue'
 import Feedback from '../views/Feedback.vue'
 
 Vue.use(Router)
@@ -11,8 +12,15 @@ Vue.use(Router)
 Vue.use(Router);
 const router = new Router({
   routes:  [
+  { path: "*", redirect: "/home" },
     {
-      path: '/',
+      path: "/",
+      component: Layout,
+      name: "Layout",
+      redirect: "/home",
+      children: [
+    {
+      path: '/home',
       name: 'Home',
       component: Home
     },
@@ -41,6 +49,8 @@ const router = new Router({
       meta: { requiresId: true }
     }
   ]
+}
+]
 });
 
 router.beforeEach((to, from, next) => {
@@ -48,7 +58,7 @@ router.beforeEach((to, from, next) => {
     let deviceId = localStorage.getItem('deviceId');
 
     if(!deviceId) {
-      next('/');
+      next('/home');
     } else {
       next();
     }
