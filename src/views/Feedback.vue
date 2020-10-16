@@ -2,7 +2,7 @@
     <div class="feedback">
         <v-container>
             <v-row justify="center" align="center">
-                <v-col sm="12" md="6" cols="12">
+                <v-col sm="12" md="12" cols="12">
                     <v-card>
                         <v-card-title primary-title>
                             <v-container class="blue darken-4" rounded>
@@ -11,29 +11,54 @@
                         </v-card-title>
                         <v-card-text>
                             <h2>Frage</h2>
-                                <p>{{ f+1 }}/6</p>
+                                <p>{{ page+1 }}/6</p>
                         </v-card-text>
                         <v-divider></v-divider>
                         <br />
-                        <v-radio-group>
+                        <v-radio-group disabled> 
                             <v-radio
-                            v-for="n in 4"
-                            :key="n"
-                            :label="`Antwort ${n}`"
-                            :value="n"
+                            label="Antwort1"
+                            :value="1"
+                            :v-model="answer1"
                             class="ml-4"
-                            disabled
+                            ></v-radio>
+                            <v-radio
+                            label="Antwort2"
+                            :value="2"
+                            :v-model="answer2"
+                            class="ml-4"
+                            ></v-radio>
+                            <v-radio 
+                            label="Antwort3"
+                            :value="3"
+                            :v-model="answer3"
+                            class="ml-4"
+                            ></v-radio>
+                            <v-radio 
+                            label="Antwort4"
+                            :value="4"
+                            :v-model="answer4"
+                            class="ml-4"
                             ></v-radio>
                         </v-radio-group>
                         <br />
                         <br />
                         <v-card-actions>
-                            <v-col offset-md="8">
+                            <v-col offset-md="1">
                             <v-btn
                             color="primary"
                             elevation="3"
                             large
-                            v-on:click="weiterButton();"
+                            v-on:click="previous();"
+                            :disabled="btn1"
+                            >zurück</v-btn>
+                            </v-col>
+                            <v-col offset-md="6">
+                            <v-btn
+                            color="primary"
+                            elevation="3"
+                            large
+                            v-on:click="next();"
                             >{{ textB }}</v-btn>
                             </v-col>
                         </v-card-actions>
@@ -44,11 +69,83 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
     data:() => ({
-        page: 0
+        page: 0,
+        answer1: false,
+        answer2: false,
+        answer3: false,
+        answer4: false,
+        btn1: false,
+        antworten: [],
+        fragen: [],
+        textB: 'weiter',
+    }),
+    methods: {
+        checkPage(){
+            if(this.page == 0) {
+                this.btn1 = true;
+            }
+            else{
+                this.btn1 = false;
+            }
+            if(this.page == 19) {
+                this.textB= 'zum Scoreboard';
+            }
+            else{
+                this.textB= 'weiter';
+            }
+        },
+        previous() {
+            this.page = this.page-1;
+            this.nextQuestion();
+        },
+        next(){
+            this.page = this.page+1;
+            this.nextQuestion();
+        },
+        nextQuestion() {
+            this.checkPage();
+        },
+        buttonsCorrection() {
+            this.answer1 = false;
+            this.answer2 = false;
+            this.answer3 = false;
+            this.answer4 = false;
+        }
+        
+    },
+    mounted(){
+        axios.get(this.$store.state.backendServer + '/question')
+        .then(function (response) {
+            console.log(response)
+            this.fragen = response
+            axios.get(this.$store.state.backendServer + '/user/' + localStorage.getItem('deviceId'))
+            .then(function (response) {
+                console.log(response);
+                this.antworten = response.submissions;
+                console.log(this.antworten);
+            })
+            .catch((err)=>{
+                console.log(err)
+            });
+        })
+    .catch((err)=>{
+      console.log(err);
+    });
+  }
 
-
-    })
 }
+
+
+
+
+
+
+
+
+
+
+
 </script>
