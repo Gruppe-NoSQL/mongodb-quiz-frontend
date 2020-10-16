@@ -11,7 +11,7 @@
                 </v-card-title>
                 <v-card-text>
                   <h2>Frage</h2>
-                  <p>1/6</p>
+                  <p>{{ f+1 }}/6</p>
                 </v-card-text>
                 <v-divider></v-divider>
                 <br />
@@ -27,12 +27,13 @@
                 <br />
                 <br />
                 <v-card-actions>
-                  <v-col offset-md="9">
+                  <v-col offset-md="8">
                       <v-btn
                       color="primary"
                       elevation="3"
                       large
-                    >WEITER</v-btn>
+                      v-on:click="weiterButton(); textButton(); resultButton()"
+                    >{{ textB }}</v-btn>
                   </v-col>
                 </v-card-actions>
             </v-card>
@@ -41,3 +42,32 @@
     </v-container>
   </div>
 </template>
+
+<script>
+
+export default {
+  data:() => ({
+    f: 0,
+    textB: 'Weiter',
+    result: ' '
+  }),
+
+  methods: {
+    weiterButton() {
+      this.f++;
+    },
+    textButton() {
+      if (this.f > 4) {
+        this.textB='Abschicken'
+      }
+    },
+    resultButton() {
+      if (this.f > 5) {
+        this.$router.push('/result')
+      }
+    }
+  }
+}
+
+
+</script>
