@@ -14,6 +14,7 @@
                     cols="12"
                     sm="6"
                     md="6"
+                    lg="10"
                   >
                     <v-form ref="form" v-model="isValid" lazy-validation>
                       <v-text-field
