@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    backendServer: 'http://127.0.0.1:3001'
+    backendServer: 'https://api.quiz.fynn-weyrich.de'
   },
   mutations: {
   },
