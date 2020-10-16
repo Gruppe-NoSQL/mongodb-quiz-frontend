@@ -2,7 +2,7 @@
     <div class="feedback">
         <v-container>
             <v-row justify="center" align="center">
-                <v-col sm="12" md="12" cols="12">
+                <v-col sm="12" md="8" lg="8" cols="12">
                     <v-card>
                         <v-card-title primary-title>
                             <v-container class="blue darken-4" rounded>
@@ -47,7 +47,6 @@
                             <v-col offset-md="1">
                             <v-btn
                             color="primary"
-                            elevation="3"
                             large
                             v-on:click="previous();"
                             :disabled="btn1"
@@ -56,7 +55,6 @@
                             <v-col offset-md="6">
                             <v-btn
                             color="primary"
-                            elevation="3"
                             large
                             v-on:click="next();"
                             >{{ textB }}</v-btn>
@@ -90,7 +88,7 @@ export default {
             else{
                 this.btn1 = false;
             }
-            if(this.page == this.fragen.length()) {
+            if(this.page == this.fragen.length) {
                 this.textB= 'zum Scoreboard';
             }
             else{
@@ -118,6 +116,7 @@ export default {
     },
     mounted(){
         this.checkPage();
+        console.log(this.$store.state.backendServer + '/question');
         axios.get(this.$store.state.backendServer + '/question')
         .then(function (response) {
             console.log(response)
