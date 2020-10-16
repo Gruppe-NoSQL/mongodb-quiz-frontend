@@ -14,9 +14,41 @@
                                 <p>{{ f+1 }}/6</p>
                         </v-card-text>
                         <v-divider></v-divider>
+                        <br />
+                        <v-radio-group>
+                            <v-radio
+                            v-for="n in 4"
+                            :key="n"
+                            :label="`Antwort ${n}`"
+                            :value="n"
+                            class="ml-4"
+                            disabled
+                            ></v-radio>
+                        </v-radio-group>
+                        <br />
+                        <br />
+                        <v-card-actions>
+                            <v-col offset-md="8">
+                            <v-btn
+                            color="primary"
+                            elevation="3"
+                            large
+                            v-on:click="weiterButton();"
+                            >{{ textB }}</v-btn>
+                            </v-col>
+                        </v-card-actions>
                     </v-card>
                 </v-col>
             </v-row>
         </v-container>
     </div>
 </template>
+<script>
+export default {
+    data:() => ({
+        page: 0
+
+
+    })
+}
+</script>
