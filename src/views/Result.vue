@@ -2,7 +2,7 @@
   <div class="quiz">
      <v-container>
       <v-row justify="center" align="center">
-          <v-col sm="12" md="10" lg="10" cols="12">
+          <v-col sm="12" md="9" lg="9" cols="12">
             <v-card>
                 <v-card-title primary-title>
                   <v-container class="blue darken-4" rounded>
