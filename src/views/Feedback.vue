@@ -11,7 +11,7 @@
                         </v-card-title>
                         <v-card-text>
                             <h2>Frage</h2>
-                                <p>{{ page+1 }}/6</p>
+                                <p>{{ page+1 }}/ {{ this.fragen.length}}</p>
                         </v-card-text>
                         <v-divider></v-divider>
                         <br />
@@ -81,6 +81,9 @@ export default {
         textB: 'weiter',
     }),
     methods: {
+        zumScoreboard() {
+            this.$router.push("/result");
+        },
         checkPage(){
             if(this.page == 0) {
                 this.btn1 = true;
@@ -97,7 +100,12 @@ export default {
         },
         previous() {
             this.page = this.page-1;
-            this.nextQuestion();
+            if(this.page== this.fragen.length){
+                this.zumScoreboard();
+            }
+            else{
+                this.nextQuestion();
+            }
         },
         next(){
             this.page = this.page+1;
@@ -115,17 +123,17 @@ export default {
         
     },
     mounted(){
+        let vm = this;
         this.checkPage();
-        console.log(this.$store.state.backendServer + '/question');
-        axios.get(this.$store.state.backendServer + '/question')
+        axios.get(vm.$store.state.backendServer + '/question')
         .then(function (response) {
-            console.log(response)
-            this.fragen = response; 
-            axios.get(this.$store.state.backendServer + '/user/' + localStorage.getItem('deviceId'))
+            console.log(response.data)
+            vm.fragen = response.data; 
+            axios.get(vm.$store.state.backendServer + '/user/' + localStorage.getItem('deviceId'))
             .then(function (response) {
-                console.log(response);
-                this.antworten = response.submissions;
-                console.log(this.antworten);
+                console.log(response.data);
+                vm.antworten = response.data.submissions;
+                console.log(vm.antworten);
             })
             .catch((err)=>{
                 console.log(err)

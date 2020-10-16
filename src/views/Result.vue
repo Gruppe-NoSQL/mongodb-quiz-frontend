@@ -72,7 +72,7 @@ export default {
   }),
   methods: {
     zurAuswertung() {
-      this.$router.push("/Feedback");
+      this.$router.push("/feedback");
     },
 
   },
