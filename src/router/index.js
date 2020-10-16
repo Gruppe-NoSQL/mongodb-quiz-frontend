@@ -17,22 +17,26 @@ const routes = [
   {
     path: '/quiz',
     name: 'Quiz',
-    component: Quiz
+    component: Quiz,
+    meta: { requiresId: true }
   },
   {
     path: '/result',
     name: 'Result',
-    component: Result
+    component: Result,
+    meta: { requiresId: true }
   },
   {
     path: '/about',
     name: 'About',
-    component: About
+    component: About,
+    meta: { requiresId: true }
   },
   {
     path: '/feedback',
     name: 'Feedback',
-    component: Feedback
+    component: Feedback,
+    meta: { requiresId: true }
   }
 ]
 
@@ -40,6 +44,20 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if(to.meta.requiresId) {
+    let deviceId = localStorage.getItem('deviceId');
+
+    if(!deviceId) {
+      next('/');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 
 export default router
