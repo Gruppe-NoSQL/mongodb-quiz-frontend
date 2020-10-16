@@ -22,12 +22,20 @@
                   <v-data-table
                     :headers="header"
                     :items= "participants"
-                    :items-per-page= "all"
-                    :hide-default-footer="true">
+                    :items-per-page="all"
+                    :hide-default-footer="true"
+                    disable-pagination>
                   </v-data-table>                 
                 </v-card-text>
                 <v-card-actions>
-                  
+                  <v-col offset-md="8">
+                      <v-btn
+                      color="primary"
+                      elevation="3"
+                      large
+                      v-on:click ="zurAuswertung()"
+                    > Auswertung</v-btn>
+                  </v-col>
                 </v-card-actions>
             </v-card>
           </v-col>
@@ -53,30 +61,28 @@ export default {
           text: 'Teilnehmer',
           align: 'start',
           sortable: 'false',
-          value: 'name',
+          value: 'username',
         },
         {
           text: 'Punkte', value: 'score', 
         },
     ],
     participants: [
-        {
-          name: 'Fynn',
-          score: '100',
-        },
-        {
-          name: 'Robin', 
-          score: '97',
-        },
     ],
   }),
   methods: {
+    zurAuswertung() {
+      this.$router.push("/Feedback");
+    },
 
   },
   mounted(){
-    axios.get(this.$store.backendServer + '/user')
-    .then((response)=>{
+    let vm = this;
+    axios.get(this.$store.state.backendServer + '/user')
+    .then(function (response) {
       console.log(response.data);
+      vm.participants = response.data;
+      console.log(vm.participants);
     })
     .catch((err)=>{
       console.log(err);
