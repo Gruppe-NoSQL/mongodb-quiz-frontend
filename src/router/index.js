@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Quiz from '../views/Quiz.vue'
 import Result from '../views/Result.vue'
 import About from '../views/About.vue'
+import Feedback from '../views/Feedback.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/feedback',
+    name: 'Feedback',
+    component: Feedback
   }
 ]
 
