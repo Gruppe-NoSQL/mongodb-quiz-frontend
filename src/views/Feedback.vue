@@ -2,7 +2,7 @@
     <div class="feedback">
         <v-container>
             <v-row justify="center" align="center">
-                <v-col sm="12" md="8" lg="8" cols="12">
+                <v-col sm="12" md="12" lg="12" cols="12">
                     <v-card>
                         <v-card-title primary-title>
                             <v-container class="blue darken-4" rounded>
@@ -52,7 +52,7 @@
                             :disabled="btn1"
                             >zurück</v-btn>
                             </v-col>
-                            <v-col offset-md="6">
+                            <v-col offset-md="5">
                             <v-btn
                             color="primary"
                             large
@@ -81,9 +81,6 @@ export default {
         textB: 'weiter',
     }),
     methods: {
-        zumScoreboard() {
-            this.$router.push("/result");
-        },
         checkPage(){
             if(this.page == 0) {
                 this.btn1 = true;
@@ -91,7 +88,7 @@ export default {
             else{
                 this.btn1 = false;
             }
-            if(this.page == this.fragen.length) {
+            if(this.page == this.fragen.length-1) {
                 this.textB= 'zum Scoreboard';
             }
             else{
@@ -108,8 +105,14 @@ export default {
             }
         },
         next(){
-            this.page = this.page+1;
-            this.nextQuestion();
+            if(this.page <this.fragen.length-1 ){
+                this.page = this.page+1;
+                this.nextQuestion();
+            }
+            else{
+                this.zumScoreboard();
+            }
+            
         },
         nextQuestion() {
             this.checkPage();
@@ -119,12 +122,14 @@ export default {
             this.answer2 = false;
             this.answer3 = false;
             this.answer4 = false;
+        },
+        zumScoreboard(){
+            this.$router.push("/result");
         }
         
     },
     mounted(){
         let vm = this;
-        this.checkPage();
         axios.get(vm.$store.state.backendServer + '/question')
         .then(function (response) {
             console.log(response.data)
@@ -142,6 +147,7 @@ export default {
     .catch((err)=>{
       console.log(err);
     });
+    this.checkPage();
   }
 
 }
