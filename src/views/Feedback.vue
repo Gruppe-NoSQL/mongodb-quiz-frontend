@@ -90,7 +90,7 @@ export default {
             else{
                 this.btn1 = false;
             }
-            if(this.page == 19) {
+            if(this.page == this.fragen.length()) {
                 this.textB= 'zum Scoreboard';
             }
             else{
@@ -117,10 +117,11 @@ export default {
         
     },
     mounted(){
+        this.checkPage();
         axios.get(this.$store.state.backendServer + '/question')
         .then(function (response) {
             console.log(response)
-            this.fragen = response
+            this.fragen = response; 
             axios.get(this.$store.state.backendServer + '/user/' + localStorage.getItem('deviceId'))
             .then(function (response) {
                 console.log(response);
@@ -137,15 +138,6 @@ export default {
   }
 
 }
-
-
-
-
-
-
-
-
-
 
 
 </script>
