@@ -5,32 +5,25 @@
           <v-col sm="12" md="10" lg="10" cols="12">
             <v-card>
                 <v-card-title primary-title>
-                  <v-container>
-                    <span class="headline">Ergebnis Seite</span>
+                  <v-container class="blue darken-4" rounded>
+                    <span class="headline white--text font-weight-black text-center">Ergebnis Seite</span>
                   </v-container>
                 </v-card-title>
                 <v-card-text>
-                  <v-list>
-                  <v-list-item class="mx-aut0">
-                    <v-list-item-content>
-                        <a v-for="(link, i) in links"
-                        :key = i
-                        :href = link.href
-                        target="_blanc">
-                          <v-list-item-title>
-                            {{ link.text }} <br/><br/>
-                          </v-list-item-title>
-                        </a>
-                    </v-list-item-content>
-                  </v-list-item>
-                  </v-list>
+                  <v-row justify="center">
+                    <a v-for="(link, i) in links"
+                      :key = i
+                      :href = link.href
+                      class="subheading font-weight-black mx-3"
+                      target="_blank">
+                        {{ link.text }}
+                    </a>
+                  </v-row><br/><br/>
                   <v-data-table
                     :headers="header"
                     :items= "participants"
                     :items-per-page= "all"
-                    :hide-default-footer="true"
-                    v-onhover>
-
+                    :hide-default-footer="true">
                   </v-data-table>                 
                 </v-card-text>
                 <v-card-actions>
@@ -44,6 +37,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data:() => ({
     links: [
@@ -55,13 +50,13 @@ export default {
       ],
     header: [
         {
-          text: 'Participants',
+          text: 'Teilnehmer',
           align: 'start',
           sortable: 'false',
           value: 'name',
         },
         {
-          text: 'Score', value: 'score',
+          text: 'Punkte', value: 'score', 
         },
     ],
     participants: [
@@ -75,5 +70,17 @@ export default {
         },
     ],
   }),
+  methods: {
+
+  },
+  mounted(){
+    axios.get(this.$store.backendServer + '/user')
+    .then((response)=>{
+      console.log(response.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+  }
 }
 </script>
