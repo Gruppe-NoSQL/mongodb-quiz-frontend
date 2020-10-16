@@ -28,7 +28,14 @@
                   </v-data-table>                 
                 </v-card-text>
                 <v-card-actions>
-                  
+                  <v-col offset-md="8">
+                      <v-btn
+                      color="primary"
+                      elevation="3"
+                      large
+                      v-on:click ="zurAuswertung()"
+                    > Auswertung</v-btn>
+                  </v-col>
                 </v-card-actions>
             </v-card>
           </v-col>
@@ -64,6 +71,9 @@ export default {
     ],
   }),
   methods: {
+    zurAuswertung() {
+      this.$router.push("/Feedback");
+    },
 
   },
   mounted(){
