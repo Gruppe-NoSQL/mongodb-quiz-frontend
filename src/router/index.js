@@ -5,48 +5,38 @@ import Quiz from '../views/Quiz.vue'
 import Result from '../views/Result.vue'
 import About from '../views/About.vue'
 import Feedback from '../views/Feedback.vue'
-import App from '../App.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  { path: "*", redirect: "/home" },
   {
-    path: "/",
-    component: App,
-    name: "App",
-    redirect: "/home",
-    childern: [
-      {
-        path: '/home',
-        name: 'Home',
-        component: Home
-      },
-      {
-        path: '/quiz',
-        name: 'Quiz',
-        component: Quiz,
-        meta: { requiresId: true }
-      },
-      {
-        path: '/result',
-        name: 'Result',
-        component: Result,
-        meta: { requiresId: true }
-      },
-      {
-        path: '/about',
-        name: 'About',
-        component: About,
-        meta: { requiresId: true }
-      },
-      {
-        path: '/feedback',
-        name: 'Feedback',
-        component: Feedback,
-        meta: { requiresId: true }
-      }
-    ]
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/quiz',
+    name: 'Quiz',
+    component: Quiz,
+    meta: { requiresId: true }
+  },
+  {
+    path: '/result',
+    name: 'Result',
+    component: Result,
+    meta: { requiresId: true }
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: { requiresId: true }
+  },
+  {
+    path: '/feedback',
+    name: 'Feedback',
+    component: Feedback,
+    meta: { requiresId: true }
   }
 ]
 
