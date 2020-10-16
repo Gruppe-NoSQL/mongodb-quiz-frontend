@@ -22,8 +22,9 @@
                   <v-data-table
                     :headers="header"
                     :items= "participants"
-                    :items-per-page= "all"
-                    :hide-default-footer="true">
+                    :items-per-page="all"
+                    :hide-default-footer="true"
+                    disable-pagination>
                   </v-data-table>                 
                 </v-card-text>
                 <v-card-actions>
@@ -53,30 +54,25 @@ export default {
           text: 'Teilnehmer',
           align: 'start',
           sortable: 'false',
-          value: 'name',
+          value: 'username',
         },
         {
           text: 'Punkte', value: 'score', 
         },
     ],
     participants: [
-        {
-          name: 'Fynn',
-          score: '100',
-        },
-        {
-          name: 'Robin', 
-          score: '97',
-        },
     ],
   }),
   methods: {
 
   },
   mounted(){
-    axios.get(this.$store.backendServer + '/user')
-    .then((response)=>{
+    let vm = this;
+    axios.get(this.$store.state.backendServer + '/user')
+    .then(function (response) {
       console.log(response.data);
+      vm.participants = response.data;
+      console.log(vm.participants);
     })
     .catch((err)=>{
       console.log(err);
