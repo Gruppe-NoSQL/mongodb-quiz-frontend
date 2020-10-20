@@ -10,29 +10,29 @@
                   </v-container>
                 </v-card-title>
                 <v-card-text>
-                  <h2>Frage</h2>
-                  <p>{{ counter+1 }}/6</p>
+                  <h2>{{ questionArr[counter] }}</h2>
+                  <p>{{ counter+1 }}/{{ questionArr.length }}</p>
                 </v-card-text>
                 <v-divider></v-divider>
                 <br />
                 <v-radio-group v-model="answer">
                   <v-radio
-                    label="Antwort1"
+                    :label= answer1Arr[counter] 
                     :value="1"
                     class="ml-4"
                   ></v-radio>
                   <v-radio
-                    label="Antwort2"
+                    :label= answer2Arr[counter]
                     :value="2"
                     class="ml-4"
                   ></v-radio>
                   <v-radio
-                    label="Antwort3"
+                    :label= answer3Arr[counter]
                     :value="3"
                     class="ml-4"
                   ></v-radio>
                   <v-radio
-                    label="Anwort4"
+                    :label= answer4Arr[counter]
                     :value="4"
                     class="ml-4"
                   ></v-radio> 
@@ -40,6 +40,7 @@
                 <br />
                 <label>{{ result }}</label>
                 <span>Picked: {{ answer }}</span>
+                <p> {{ answer1Arr }} </p>
                 <br />
                 <v-card-actions>
                   <v-col offset-md="8">
@@ -60,6 +61,7 @@
 
 
 <script>
+import axios from 'axios';
 
 export default {
   data:() => ({
@@ -67,15 +69,25 @@ export default {
     textB: 'Weiter',
     result: [],
     answer: ' ',
-    Antwort4: ' ',
+    info: [],
+    user: [],
+    questionArr: [],
+    answer1Arr: [],
+    answer2Arr: [],
+    answer3Arr: [],
+    answer4Arr: [],
+    questionIDArr: [],
+    userIDArr: []
   }),
 
   methods: {
     weiterButton() {
       this.counter++;
+
     },
     textButton() {
-      if (this.counter > 4) {
+      let x = this.questionArr.length-2
+      if (this.counter > x) {
         this.textB='Abschicken'
       }
     },
@@ -85,10 +97,10 @@ export default {
       }
     },
     checkedBox(){
+      this.result.push(this.questionIDArr[this.counter])
       if (this.answer=='1'){
         this.result.push("a")
         this.answer=' '
-        //senden & array löschen
       }
       if (this.answer=='2'){
         this.result.push("b")
@@ -105,9 +117,41 @@ export default {
 
     },
     sendAnswer(){
-        //
+      
       }
     },
+    mounted(){
+      let vm = this;
+    axios.get(vm.$store.state.backendServer + '/question')
+    .then(function (response) {
+      vm.info=response.data;
+      for(let i=0; i<vm.info.length; i++) {
+        vm.questionArr.push(vm.info[i].question)
+        vm.answer1Arr.push(vm.info[i].answer1)
+        vm.answer2Arr.push(vm.info[i].answer2)
+        vm.answer3Arr.push(vm.info[i].answer3)
+        vm.answer4Arr.push(vm.info[i].answer4)
+        vm.questionIDArr.push(vm.info[i]._id)
+
+      }
+      axios.get(vm.$store.state.backendServer + '/user')
+      .then(function (response){
+        vm.user=response.data;
+        for(let i=0; i<vm.user.length; i++) {
+          vm.userIDArr.push(vm.user[i]._id)
+        }
+      })
+      .catch((err)=>{
+      console.log(err);
+      });
+    })
+
+    .catch((err)=>{
+      console.log(err);
+    });
+
+    
+  }
   }
 
 
