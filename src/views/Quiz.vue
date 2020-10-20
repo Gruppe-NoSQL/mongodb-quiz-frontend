@@ -38,9 +38,7 @@
                   ></v-radio> 
                 </v-radio-group>
                 <br />
-                <label>{{ result }}</label>
-                <span>Picked: {{ answer }}</span>
-                <p> {{ answer1Arr }} </p>
+                <p> {{ result }} </p>
                 <br />
                 <v-card-actions>
                   <v-col offset-md="8">
@@ -92,7 +90,8 @@ export default {
       }
     },
     resultButton() {
-      if (this.counter > 5) {
+      let x = this.questionArr.length-1
+      if (this.counter > x) {
         this.$router.push('/result')
       }
     },
