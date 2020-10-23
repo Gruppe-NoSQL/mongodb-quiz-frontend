@@ -119,7 +119,7 @@ export default {
             else{
                 this.textB= 'weiter';
             }
-            this.buttonsAnswer();
+            this.buttons();
 
             
         },
@@ -144,7 +144,7 @@ export default {
         buttons() {
             /*Überprüft, welche bzw. Ob eine Antwort vom User bei der bestimmten Frage angekreuzt wurde und Ob diese Richtig war.
             Färbt die Antworten entsprechend */
-            let qId = this.fragen[this.page]._Id;
+            let qId = this.fragen[this.page]._id;
             let temp = this.fragen[this.page]
             this.aktFrage = temp.question;
             let antwort;
