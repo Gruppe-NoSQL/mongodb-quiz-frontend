@@ -143,12 +143,12 @@ export default {
         buttons() {
             /*Überprüft, welche bzw. ob eine Antwort vom User bei der bestimmten Frage angekreuzt wurde und Ob diese Richtig war.
             Färbt die Antworten entsprechend */
-            let qId = this.questions[this.page]._id;
             let temp = this.questions[this.page]
+            let qId = temp._id;
             this.actQuestion = temp.question;
             let answer;
             for(let i = 0; i< this.answers.length; i++){
-                if(qId == this.answers.questionId){
+                if(qId == this.answers[i].questionId){
                     answer = this.answers[i];
                     break;
                 }
