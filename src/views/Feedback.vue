@@ -142,7 +142,7 @@ export default {
         },
 
         buttons() {
-            /*Überprüft, welche bzw. Ob eine Antwort vom User bei der bestimmten Frage angekreuzt wurde und Ob diese Richtig war.
+            /*Überprüft, welche bzw. ob eine Antwort vom User bei der bestimmten Frage angekreuzt wurde und Ob diese Richtig war.
             Färbt die Antworten entsprechend */
             let qId = this.fragen[this.page]._id;
             let temp = this.fragen[this.page]
@@ -254,6 +254,7 @@ export default {
     .catch((err)=>{
       console.log(err);
     });
+    this.buttons();
     this.checkPage();
   }
 
