@@ -50,7 +50,7 @@ import axios from 'axios';
 export default {
   data:() => ({
     links: [
-        {text: 'Handout', href: '#'},
+        {text: 'Handout', href: 'https://github.com/Gruppe-NoSQL/nosql-quiz-handout'},
 
         {text: 'Lösungen', href: '#'},
 
