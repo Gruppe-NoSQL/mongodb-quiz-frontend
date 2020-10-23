@@ -237,7 +237,7 @@ export default {
         befüllt das Array antworten mit der questionId, der Antwort des Users und ob diese richitg war.
         lädt danach die Buttons der ersten Seite */
         let vm = this;
-        axios.get(vm.$store.state.backendServer + '/question' + localStorage.getItem('deviceId'))
+        axios.get(vm.$store.state.backendServer + '/question/' + localStorage.getItem('deviceId'))
         .then(function (response) {
             console.log(response.data)
             vm.fragen = response.data; 
