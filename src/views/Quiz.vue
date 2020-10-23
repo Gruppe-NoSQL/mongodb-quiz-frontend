@@ -38,7 +38,6 @@
                   ></v-radio> 
                 </v-radio-group>
                 <br />
-                <p> {{ result }} </p>
                 <br />
                 <v-card-actions>
                   <v-col offset-md="8">
