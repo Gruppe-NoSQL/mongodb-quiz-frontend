@@ -79,40 +79,55 @@ export default {
   }),
 
   methods: {
+
+    //counts the clicks on button
     weiterButton() {
       this.counter++;
 
     },
+
+    //change of button to "Abschicken", if it is the last question
     textButton() {
       let x = this.questionArr.length-2
       if (this.counter > x) {
         this.textB='Abschicken'
+        axios.put(this.$store.state.backendServer + '/user/' + localStorage.getItem('deviceId') + '/sub', this.result)
+      .catch((err)=>{
+      console.log(err);
+      });
       }
     },
+
+    //go to result page
     resultButton() {
       let x = this.questionArr.length-1
       if (this.counter > x) {
         this.$router.push('/result')
       }
     },
+
+    //which box is checked
+    //push checked answer in result and clear box
     checkedBox(){
-      this.result.push(this.questionIDArr[this.counter])
+      let answerSubmission = {};
+      answerSubmission.questionId =this.questionIDArr[this.counter];
       if (this.answer=='1'){
-        this.result.push("a")
+        answerSubmission.submission='a'
         this.answer=' '
       }
       if (this.answer=='2'){
-        this.result.push("b")
+        answerSubmission.submission='b'
         this.answer=' '
       }
       if (this.answer=='3'){
-        this.result.push("c")
+        answerSubmission.submission='c'
         this.answer=' '
       }
       if (this.answer=='4'){
-        this.result.push("d")
+        answerSubmission.submission='d'
         this.answer=' '
       }
+      this.result.push(answerSubmission)
 
     },
     sendAnswer(){
@@ -121,7 +136,7 @@ export default {
     },
     mounted(){
       let vm = this;
-    axios.get(vm.$store.state.backendServer + '/question')
+    axios.get(vm.$store.state.backendServer + '/question/' + localStorage.getItem('deviceId'))
     .then(function (response) {
       vm.info=response.data;
       for(let i=0; i<vm.info.length; i++) {
@@ -133,7 +148,7 @@ export default {
         vm.questionIDArr.push(vm.info[i]._id)
 
       }
-      axios.get(vm.$store.state.backendServer + '/user')
+      axios.get(vm.$store.state.backendServer + '/user/' + localStorage.getItem('deviceId'))
       .then(function (response){
         vm.user=response.data;
         for(let i=0; i<vm.user.length; i++) {
@@ -148,6 +163,7 @@ export default {
     .catch((err)=>{
       console.log(err);
     });
+
 
     
   }
