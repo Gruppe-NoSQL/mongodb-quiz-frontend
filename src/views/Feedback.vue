@@ -136,7 +136,7 @@ export default {
                 this.checkPage();
             }
             else{
-                this.zumScoreboard();
+                this.toScoreboard();
             }
         },
 
@@ -225,7 +225,7 @@ export default {
 
             }
         },
-        zumScoreboard(){
+        toScoreboard(){
             /* Ruft die scoreborad Seite auf */
             this.$router.push("/result");
         }
