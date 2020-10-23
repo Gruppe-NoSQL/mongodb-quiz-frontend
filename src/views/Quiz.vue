@@ -45,7 +45,7 @@
                       color="primary"
                       elevation="3"
                       large
-                      v-on:click="weiterButton(); textButton(); resultButton(); checkedBox()"
+                      v-on:click="weiterButton(); resultButton(); checkedBox(); textButton()"
                     >{{ textB }}</v-btn>
                   </v-col>
                 </v-card-actions>
@@ -146,18 +146,7 @@ export default {
         vm.answer4Arr.push(vm.info[i].answer4)
         vm.questionIDArr.push(vm.info[i]._id)
 
-      }
-      axios.get(vm.$store.state.backendServer + '/user/' + localStorage.getItem('deviceId'))
-      .then(function (response){
-        vm.user=response.data;
-        for(let i=0; i<vm.user.length; i++) {
-          vm.userIDArr.push(vm.user[i]._id)
-        }
-      })
-      .catch((err)=>{
-      console.log(err);
-      });
-    })
+      }})
 
     .catch((err)=>{
       console.log(err);
