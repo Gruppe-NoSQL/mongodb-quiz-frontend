@@ -108,7 +108,6 @@ export default {
       /* Wenn die letzte Frage erreicht ist, so soll der Button zu der Result-Seite führen*/
       let x = this.questionArr.length - 2;
       if (this.counter > x) {
-        this.$router.push("/result");
         axios
             .put(
               this.$store.state.backendServer +
@@ -117,6 +116,9 @@ export default {
                 "/sub",
               this.result
             )
+            .then(() => {
+              this.$router.push("/result");
+            })
             .catch((err) => {
               console.log(err);
             });}
