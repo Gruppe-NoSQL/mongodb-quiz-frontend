@@ -2,7 +2,7 @@
   <div class="home">
     <v-container>
       <v-row justify="center" align="center">
-          <v-col sm="12" md="6" cols="12">
+          <v-col sm="12" md="8" lg="6" cols="12">
             <v-card>
                 <v-card-title primary-title>
                   <v-container>
@@ -14,7 +14,7 @@
                     cols="12"
                     sm="6"
                     md="6"
-                    lg="10"
+                    lg="5"
                   >
                     <v-form ref="form" v-model="isValid" lazy-validation>
                       <v-text-field

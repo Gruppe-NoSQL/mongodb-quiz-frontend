@@ -34,7 +34,7 @@ const router = new Router({
       path: '/result',
       name: 'Result',
       component: Result,
-      meta: { requiresId: true }
+      meta: { requiresId: true, requiresFinish: true }
     },
     {
       path: '/about',
@@ -46,7 +46,7 @@ const router = new Router({
       path: '/feedback',
       name: 'Feedback',
       component: Feedback,
-      meta: { requiresId: true }
+      meta: { requiresId: true, requiresFinish: true }
     }
   ]
 }

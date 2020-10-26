@@ -2,7 +2,7 @@
   <div class="quiz">
      <v-container>
       <v-row justify="center" align="center">
-          <v-col sm="12" md="10" lg="10" cols="12">
+          <v-col sm="12" md="8" lg="8" cols="12">
             <v-card>
                 <v-card-title primary-title>
                   <v-container class="blue darken-4" rounded>
@@ -50,7 +50,7 @@ import axios from 'axios';
 export default {
   data:() => ({
     links: [
-        {text: 'Handout', href: '#'},
+        {text: 'Handout', href: 'https://github.com/Gruppe-NoSQL/nosql-quiz-handout'},
 
         {text: 'Lösungen', href: '#'},
 
@@ -72,7 +72,7 @@ export default {
   }),
   methods: {
     zurAuswertung() {
-      this.$router.push("/Feedback");
+      this.$router.push("/feedback");
     },
 
   },
