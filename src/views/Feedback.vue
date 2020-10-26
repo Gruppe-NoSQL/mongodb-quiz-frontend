@@ -244,6 +244,7 @@ export default {
             .then(function (response) {
                 vm.answers = response.data.submissions;
                 console.log(vm.answers);
+                vm.checkPage();
             })
             .catch((err)=>{
                 console.log(err)
@@ -252,7 +253,7 @@ export default {
     .catch((err)=>{
       console.log(err);
     });
-    this.checkPage();
+    
   }
 
 }
