@@ -5,8 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    //backendServer: 'https://api.nosql.fynn-weyrich.de'
-    backendServer: 'http://localhost:3001'
+    backendServer: 'https://api.nosql.fynn-weyrich.de'
   },
   mutations: {
   },
