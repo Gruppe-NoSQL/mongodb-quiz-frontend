@@ -19,13 +19,33 @@
                         {{ link.text }}
                     </a>
                   </v-row><br/><br/>
-                  <v-data-table
-                    :headers="header"
-                    :items= "participants"
-                    :items-per-page="all"
-                    :hide-default-footer="true"
-                    disable-pagination>
-                  </v-data-table>                 
+                  <v-simple-table>
+                    <template v-slot:default>
+                      <thead>
+                        <tr>
+                          <th class="text-left">
+                            Platzierung
+                          </th>
+                          <th class="text-left">
+                            Name
+                          </th>
+                          <th class="text-left">
+                            Punktzahl
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(item, i) in participants"
+                          :key="item.username"
+                        >
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ item.username }}</td>
+                          <td>{{ item.score }}</td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>                
                 </v-card-text>
                 <v-card-actions>
                   <v-col offset-md="8">
@@ -56,17 +76,6 @@ export default {
 
         {text: 'Fynns 3. Link', href: '#'}
       ],
-    header: [
-        {
-          text: 'Teilnehmer',
-          align: 'start',
-          sortable: 'false',
-          value: 'username',
-        },
-        {
-          text: 'Punkte', value: 'score', 
-        },
-    ],
     participants: [
     ],
   }),
