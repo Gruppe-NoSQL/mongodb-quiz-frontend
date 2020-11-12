@@ -2,7 +2,7 @@
   <div class="home">
     <v-container>
       <v-row justify="center" align="center">
-          <v-col sm="12" md="8" lg="6" cols="12">
+          <v-col sm="12" md="8" lg="8" cols="12">
             <v-card>
                 <v-card-title primary-title>
                   <v-container>
