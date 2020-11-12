@@ -72,9 +72,9 @@ export default {
     links: [
         {text: 'Handout', href: 'https://github.com/Gruppe-NoSQL/nosql-quiz-handout'},
 
-        {text: 'Lösungen', href: '#'},
+        {text: 'Backend', href: 'https://github.com/Gruppe-NoSQL/nosql-quiz-backend'},
 
-        {text: 'Fynns 3. Link', href: '#'}
+        {text: 'Frontend', href: 'https://github.com/Gruppe-NoSQL/nosql-quiz-frontend'}
       ],
     participants: [
     ],
@@ -89,9 +89,7 @@ export default {
     let vm = this;
     axios.get(this.$store.state.backendServer + '/user')
     .then(function (response) {
-      console.log(response.data);
       vm.participants = response.data;
-      console.log(vm.participants);
     })
     .catch((err)=>{
       console.log(err);

@@ -2,7 +2,7 @@
     <div class="feedback">
         <v-container>
             <v-row justify="center" align="center">
-                <v-col sm="12" md="12" lg="12" cols="12">
+                <v-col sm="12" md="8" lg="8" cols="12">
                     <v-card>
                         <v-card-title primary-title>
                             <v-container class="blue darken-4" rounded>
@@ -238,12 +238,10 @@ export default {
         let vm = this;
         await axios.get(vm.$store.state.backendServer + '/question/' + localStorage.getItem('deviceId'))
         .then(function (response) {
-            console.log(response.data);
             vm.questions = response.data; 
             axios.get(vm.$store.state.backendServer + '/user/' + localStorage.getItem('deviceId'))
             .then(function (response) {
                 vm.answers = response.data.submissions;
-                console.log(vm.answers);
                 vm.checkPage();
             })
             .catch((err)=>{
